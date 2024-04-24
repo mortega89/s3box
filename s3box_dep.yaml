@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: s3test
+  name: s3box
+spec:
+  selector:
+    matchLabels:
+      app: s3box
+  template:
+    metadata:
+      labels:
+        app: s3box
+    spec:
+      containers:
+      - name: s3box
+        image: mortegatic/s3:latest
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 30; done;" ]
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
